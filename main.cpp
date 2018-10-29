@@ -45,12 +45,15 @@ vector<int> getFullVector() {
 }
 
 void printSudoku() {
+	cout << endl << "  ~~~~~~~~~ SUDOKU ~~~~~~~~~" << endl << endl;
 	for(int xx=0; xx<9; xx++) { 
+		cout << "      ";
 		for(int yy=0; yy<9; yy++) {
-			cout << "  " << sud[xx][yy] << " ";				
+			cout << sud[xx][yy] << " ";				
 		}
 		cout << endl;
 	}
+	cout << endl << "  ~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 }
 
 
