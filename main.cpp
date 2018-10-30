@@ -20,9 +20,6 @@ vector<Point> createHugeVector();
 // That one prints the sudoku table on the screen
 void printSudoku();
 
-// Function that erasing from vector specific value (not from specyific place)
-void removeFromVec(vector<Point> &v, int what);
-
 // Remove field in specific position
 void removeField(vector<Point> &v, int x, int y);
 
@@ -109,15 +106,6 @@ void printSudoku() {
 	cout << endl << "  ~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl << endl;
 }
 
-void removeFromVec(vector<int> &v, int what) {
-	for(int i=v.size()-1; i>=0; i--) {
-		if(v[i] == what) {
-			v.erase(v.begin() + i);
-			return;
-		}
-	}
-}
-
 void removeField(vector<Point> &v, int x, int y) {
 	for(int i=0; i<v.size(); i++) {
 		if(v[i].x == x) {
@@ -134,11 +122,19 @@ void removeSquare(vector<Point>, int x, int y) {
 }
 
 void removeRow(vector<Point> &v, int y) {
-
+	for(int i=v.size()-1; i>=0; i++) {
+		if(v[i].y == y) {
+			v.erase(v.begin() + i);
+		}
+	}
 }
 
 void removeColumn(vector<Point> &v, int x) {
-
+	for(int i=v.size()-1; i>=0; i++) {
+		if(v[i].x == x) {
+			v.erase(v.begin() + i);
+		}
+	}
 }
 
 
