@@ -24,7 +24,7 @@ void printSudoku();
 void removeField(vector<Point> &v, int x, int y);
 
 // x, y are position of field (not square), that is in square for remove
-void removeSquare(vector<Point>, int x, int y);
+void removeSquare(vector<Point> &v, int x, int y);
 
 // Remove all fields with specific y
 void removeRow(vector<Point> &v, int y);
@@ -54,6 +54,26 @@ bool generateSudoku() {
 int main() {
 
 	srand(time(NULL));
+	
+	/*
+	for(int xx=0; xx<9; xx++) {
+		for(int yy=0; yy<9; yy++) {
+		
+		}	
+	}
+	*/
+	
+	vector<Point> v = createHugeVector();
+	
+	removeRow(v, 3);
+	removeColumn(v, 6);
+	removeSquare(v, 4, 4);
+	
+	for(int i=0; i<v.size(); i++) {
+		sud[v[i].x][v[i].y] = i%9 + 1;
+	}	
+	
+	printSudoku();
 
 	/*
 	int counter = 0;
@@ -107,7 +127,7 @@ void printSudoku() {
 }
 
 void removeField(vector<Point> &v, int x, int y) {
-	for(int i=0; i<v.size(); i++) {
+	for(int i=v.size()-1; i>=0; i--) {
 		if(v[i].x == x) {
 			if(v[i].y == y) {
 				v.erase(v.begin() + i);
@@ -118,20 +138,16 @@ void removeField(vector<Point> &v, int x, int y) {
 }
 
 void removeSquare(vector<Point> &v, int x, int y) {
-	int xx = x/3 * 3;
-	int xy = y/3 * 3;
-	int toX = xx + 3;
-	int toY = yy + 3;
-	
-	for( ; xx<toX; xx++) {
-		for( ; yy<toY; yy++) {
+	for(int xx=x/3*3; xx<x/3*3+3; xx++) {
+		for(int yy=y/3*3; yy<y/3*3+3; yy++) {
 			removeField(v, xx, yy);
+			cout << ".";
 		}
 	}
 }
 
 void removeRow(vector<Point> &v, int y) {
-	for(int i=v.size()-1; i>=0; i++) {
+	for(int i=v.size()-1; i>=0; i--) {
 		if(v[i].y == y) {
 			v.erase(v.begin() + i);
 		}
@@ -139,7 +155,7 @@ void removeRow(vector<Point> &v, int y) {
 }
 
 void removeColumn(vector<Point> &v, int x) {
-	for(int i=v.size()-1; i>=0; i++) {
+	for(int i=v.size()-1; i>=0; i--) {
 		if(v[i].x == x) {
 			v.erase(v.begin() + i);
 		}
