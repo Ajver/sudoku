@@ -26,8 +26,6 @@ square getSquare(int x, int y);
 
 bool generateSudoku() {
 	
-	}
-	
 	return true;
 }
 
