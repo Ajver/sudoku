@@ -23,9 +23,16 @@ void printSudoku();
 // Function that erasing from vector specific value (not from specyific place)
 void removeFromVec(vector<Point> &v, int what);
 
+// Remove field in specific position
 void removeField(vector<Point> &v, int x, int y);
+
+// x, y are position of field (not square), that is in square for remove
 void removeSquare(vector<Point>, int x, int y);
+
+// Remove all fields with specific y
 void removeRow(vector<Point> &v, int y);
+
+// Remove all fields with specific x
 void removeColumn(vector<Point> &v, int x);
 
 bool generateSudoku() {
@@ -110,6 +117,35 @@ void removeFromVec(vector<int> &v, int what) {
 		}
 	}
 }
+
+void removeField(vector<Point> &v, int x, int y) {
+	for(int i=0; i<v.size(); i++) {
+		if(v[i].x == x) {
+			if(v[i].y == y) {
+				v.erase(v.begin() + i);
+				return;
+			}
+		}
+	}
+}
+
+void removeSquare(vector<Point>, int x, int y) {
+
+}
+
+void removeRow(vector<Point> &v, int y) {
+
+}
+
+void removeColumn(vector<Point> &v, int x) {
+
+}
+
+
+
+
+
+
 
 
 
