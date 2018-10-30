@@ -117,8 +117,17 @@ void removeField(vector<Point> &v, int x, int y) {
 	}
 }
 
-void removeSquare(vector<Point>, int x, int y) {
-
+void removeSquare(vector<Point> &v, int x, int y) {
+	int xx = x/3 * 3;
+	int xy = y/3 * 3;
+	int toX = xx + 3;
+	int toY = yy + 3;
+	
+	for( ; xx<toX; xx++) {
+		for( ; yy<toY; yy++) {
+			removeField(v, xx, yy);
+		}
+	}
 }
 
 void removeRow(vector<Point> &v, int y) {
