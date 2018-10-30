@@ -11,7 +11,7 @@ struct Point {
 };
 
 
-// A sudoku
+// A sudoku table
 int sud[9][9];
 
 // That function returns us vector with all Points from sudoku Table
@@ -40,11 +40,13 @@ bool generateSudoku() {
 	*/	
 	vector<Point> v[9];
 	
-	// On begin all vectors are full (each contains all 81 fields that is in sudoku) 
+	// On begin all vectors are full (each contains all 81 fields that is in sudoku table) 
 	for(int i=0; i<9; i++) {
 		v[i] = createHugeVector();
 	}
 	
+	
+	// If sudoku has been generated successfully
 	return true;
 }
 
