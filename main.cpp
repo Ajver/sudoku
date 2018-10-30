@@ -5,26 +5,41 @@
 using namespace std;
 
 // Helping structure
-struct square {
+struct Point {
 	int x;
-	int y;
+	int y;	
 };
 
-// A sudoku 
+
+// A sudoku
 int sud[9][9];
 
-// That function returns us vector with numbers from 1 to 9 
-vector<int> getFullVector();
+// That function returns us vector with all Points from sudoku Table
+vector<Point> createHugeVector();
 
 // That one prints the sudoku table on the screen
 void printSudoku();
 
 // Function that erasing from vector specific value (not from specyific place)
-void removeFromVec(vector<int> &v, int what);
+void removeFromVec(vector<Point> &v, int what);
 
-square getSquare(int x, int y);
+void removeField(vector<Point> &v, int x, int y);
+void removeSquare(vector<Point>, int x, int y);
+void removeRow(vector<Point> &v, int y);
+void removeColumn(vector<Point> &v, int x);
 
 bool generateSudoku() {
+	/* 
+	 * Vectors with all fields, where is possible to put there some value
+	 * for example: number 3 you can put in each field, that is in  
+	 * the v[2] vector (counting from 0)
+	*/	
+	vector<Point> v[9];
+	
+	// On begin all vectors are full (each contains all 81 fields that is in sudoku) 
+	for(int i=0; i<9; i++) {
+		v[i] = createHugeVector();
+	}
 	
 	return true;
 }
@@ -46,19 +61,27 @@ int main() {
 	cout << "After " << counter << " times:" << endl;
 	*/
 	
-	generateSudoku();
-	printSudoku();
+	//generateSudoku();
+	//printSudoku();
 	
 	return 0;
 }
 
 /////////////////////////////////////////////////////////////////////////
 
-vector<int> getFullVector() {
-	vector<int> v;
-	for(int i=1; i<=9; i++) {
-		v.push_back(i);
+vector<Point> createHugeVector() {
+	vector<Point> v;
+	
+	for(int xx=0; xx<9; xx++) {
+		for(int yy=0; yy<9; yy++) {
+			Point p;
+			p.x = xx;
+			p.y = yy;
+			
+			v.push_back(p);
+		}
 	}
+	
 	return v;
 }
 
@@ -83,23 +106,10 @@ void removeFromVec(vector<int> &v, int what) {
 	for(int i=v.size()-1; i>=0; i--) {
 		if(v[i] == what) {
 			v.erase(v.begin() + i);
+			return;
 		}
 	}
 }
-
-square getSquare(int x, int y) {
-	int a = x/3;
-	int b = y/3;
-	
-	square s;
-	s.x = a;
-	s.y = b;
-	
-	return s;
-}
-
-
-
 
 
 
