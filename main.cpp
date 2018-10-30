@@ -54,26 +54,6 @@ bool generateSudoku() {
 int main() {
 
 	srand(time(NULL));
-	
-	/*
-	for(int xx=0; xx<9; xx++) {
-		for(int yy=0; yy<9; yy++) {
-		
-		}	
-	}
-	*/
-	
-	vector<Point> v = createHugeVector();
-	
-	removeRow(v, 3);
-	removeColumn(v, 6);
-	removeSquare(v, 4, 4);
-	
-	for(int i=0; i<v.size(); i++) {
-		sud[v[i].x][v[i].y] = i%9 + 1;
-	}	
-	
-	printSudoku();
 
 	/*
 	int counter = 0;
