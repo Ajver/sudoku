@@ -26,44 +26,6 @@ square getSquare(int x, int y);
 
 bool generateSudoku() {
 	
-	for(int xx=0; xx<9; xx++) { 
-		for(int yy=0; yy<9; yy++) {
-			// All possible numbers for specific field
-			vector<int> v = getFullVector();			
-			
-			// Checking in row
-			for(int i=0; i<9; i++) {
-				if(sud[i][yy] != 0) {
-					removeFromVec(v, sud[i][yy]);
-				}
-			}
-			
-			// Checking in column
-			for(int i=0; i<9; i++) {
-				if(sud[xx][i] != 0) {
-					removeFromVec(v, sud[xx][i]);
-				}
-			}
-			
-			// Checking in squre
-			square s = getSquare(xx, yy);
-			
-			for(int fx=s.x*3; fx<s.x*3+3; fx++) {
-				for(int fy=s.y*3; fy<s.y*3+3; fy++) {
-					if(sud[fx][fy] != 0) {
-						removeFromVec(v, sud[fx][fy]);
-					}
-				}
-			} 
-			
-			if(v.size() > 0) {
-				int nr = rand() % v.size();
-				int val = v[nr];
-				sud[xx][yy] = val;
-			}else {
-				return false;
-			}
-		}
 	}
 	
 	return true;
