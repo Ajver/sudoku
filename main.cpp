@@ -32,6 +32,9 @@ void removeRow(vector<Point> &v, int y);
 // Remove all fields with specific x
 void removeColumn(vector<Point> &v, int x);
 
+// Returns random point from vector and NOT removing that!
+Point getRandomPoint(vector<Point> &v);
+
 bool generateSudoku() {
 	/* 
 	 * Vectors with all fields, where is possible to put there some value
@@ -43,6 +46,27 @@ bool generateSudoku() {
 	// On begin all vectors are full (each contains all 81 fields that is in sudoku table) 
 	for(int i=0; i<9; i++) {
 		v[i] = createHugeVector();
+	}
+	
+	for(int cur=0; cur<9; cur++) {
+		for(int i=0; i<9; i++) {
+				if(v[cur].empty()) {
+					// Cannot complete sudoku!
+					return false;
+				}
+				
+				Point p = getRandomPoint(v[cur]);
+				
+				sud[p.x][p.y] = cur + 1;
+				
+				for(int j=0; j<9; j++) {
+					removeField(v[j], p.x, p.y);
+				}
+				
+				removeRow(v[cur], p.y);
+				removeColumn(v[cur], p.x);
+				removeSquare(v[cur], p.x, p.y);
+		}
 	}
 	
 	
@@ -57,7 +81,7 @@ int main() {
 
 	srand(time(NULL));
 
-	/*
+	
 	int counter = 0;
 	
 	while(!generateSudoku()) {
@@ -65,10 +89,11 @@ int main() {
 	}
 	
 	cout << "After " << counter << " times:" << endl;
-	*/
+	
 	
 	//generateSudoku();
-	//printSudoku();
+	
+	printSudoku();
 	
 	return 0;
 }
@@ -120,10 +145,14 @@ void removeField(vector<Point> &v, int x, int y) {
 }
 
 void removeSquare(vector<Point> &v, int x, int y) {
-	for(int xx=x/3*3; xx<x/3*3+3; xx++) {
-		for(int yy=y/3*3; yy<y/3*3+3; yy++) {
+	int xx = x/3*3;
+	int yy = y/3*3;
+	int toX = xx+3;
+	int toY = yy+3;
+
+	for( ; xx<toX; xx++) {
+		for( ; yy<toY; yy++) {
 			removeField(v, xx, yy);
-			cout << ".";
 		}
 	}
 }
@@ -144,7 +173,10 @@ void removeColumn(vector<Point> &v, int x) {
 	}
 }
 
-
+Point getRandomPoint(vector<Point> &v) {
+	int nr = rand() % v.size();
+	return v[nr];
+}
 
 
 
