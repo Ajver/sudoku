@@ -14,6 +14,9 @@ struct Point {
 // A sudoku table
 int sud[9][9];
 
+// Function that tests sudoku and returns if is it correct 
+bool isCorrect();
+
 // That function returns us vector with all Points from sudoku Table
 vector<Point> createHugeVector();
 
@@ -88,17 +91,60 @@ int main() {
 		counter++;
 	}
 	
+	cout << endl;
 	cout << "After " << counter << " times:" << endl;
-	
+	cout << "Is correct: " << (isCorrect() ? "true" : "false") << endl;
 	
 	//generateSudoku();
 	
 	printSudoku();
 	
+	cout << endl;
+	
 	return 0;
 }
 
 /////////////////////////////////////////////////////////////////////////
+
+// If vector contains some value
+bool vContains(vector<int> &v, int val) {
+	for(int i=0; i<v.size(); i++) {
+		if(v[i] == val) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+bool isCorrect() {
+	vector<int> vRow[9];
+	vector<int> vSqr[9];
+		
+	for(int xx=0; xx<9; xx++) {
+		vector<int> vCol;
+		for(int yy=0; yy<9; yy++) {
+			if(vContains(vCol, sud[xx][yy])) {
+				cout << "Col: [x:" << xx << " y:" << yy << "]" << endl;
+			} 
+			
+			if(vContains(vRow[xx], sud[xx][yy])) {
+				cout << "Row: [x:" << xx << " y:" << yy << "]" << endl;
+			}
+			
+			int sqrId = (yy/3 * 3) + xx/3;
+			if(vContains(vSqr[sqrId], sud[xx][yy])) {
+				cout << "Sqr: [x:" << xx << " y:" << yy << "]" << endl;
+			}
+			
+			vCol.push_back(sud[xx][yy]);
+			vRow[xx].push_back(sud[xx][yy]);
+			vSqr[sqrId].push_back(sud[xx][yy]);
+		}	
+	}
+	
+	return true;
+}
 
 vector<Point> createHugeVector() {
 	vector<Point> v;
