@@ -11,22 +11,22 @@ int main() {
 	srand(time(NULL));
 
 	Sudoku sudoku;
-	
+
 	int counter = 0;
-	
-	while(!sudoku.generate()) {
+
+	while(!sudoku.generateSudoku()) {
 		counter++;
 	}
-	
+
 	cout << endl;
 	cout << "After " << counter << " times:" << endl;
 	cout << "Is correct: " << (sudoku.isCorrect() ? "true" : "false") << endl;
-	
-	
+
+
 	sudoku.print();
-	
+
 	cout << endl;
-	
+
 	return 0;
 }
 
