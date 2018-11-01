@@ -76,6 +76,7 @@ const toogleFullScreen = () => {
   if(isFullscreen) {
     let wrap = document.querySelector('.wrap');
     wrap.style.transform = 'scale(1.0)';
+    scale = 1.0;
   }else {
     fitToWindow();
   }
