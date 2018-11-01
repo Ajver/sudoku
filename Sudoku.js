@@ -7,7 +7,36 @@ function SudokuGenerator() {
 
 	// That method is genereting sudoku in the sud array
 	this.generateSudoku = sud => {
-    
+    /*
+    * Vectors with all fields, where is possible to put there some value
+    * for example: number 3 you can put in each field, that is in
+    * the v[2] vector (counting from 0)
+    */
+    let v = [];
+
+    // On begin all vectors are full (each contains all 81 fields that is in sudoku table)
+    for(let i=0; i<9; i++) {
+      v.push(this.createHugeVector());
+    }
+    for(let cur=0; cur<9; cur++) {
+      for(let i=0; i<9; i++) {
+          if(v[cur].length === 0) {
+            // Cannot complete sudoku!
+            return false;
+          }
+          let p = this.getRandomPoint(v[cur]);
+          sud[p.x][p.y] = cur + 1;
+          for(let j=0; j<9; j++) {
+            this.removeField(v[j], p.x, p.y);
+          }
+          this.removeRow(v[cur], p.y);
+          this.removeColumn(v[cur], p.x);
+          this.removeSquare(v[cur], p.x, p.y);
+      }
+    }
+
+    // If sudoku has been generated successfully
+    return true;
   }
 
 	// That function returns us vector with all Points from sudoku Table
@@ -66,7 +95,7 @@ function SudokuGenerator() {
   }
 
 	// Returns random point from vector and NOT removing that!
-	this.getRandomPoint = v => v[random(v.length)];
+	this.getRandomPoint = v => v[ floor( random(v.length) ) ];
 }
 
 
@@ -85,7 +114,32 @@ function Sudoku() {
 
 	// Function that tests sudoku and returns if is it correct
 	this.isCorrect = () => {
-
+    let vRow = [];
+    let vSqr = [];
+    for(let i=0; i<9; i++) {
+      vRow.push([]);
+      vSqr.push([]);
+    }
+    for(let xx=0; xx<9; xx++) {
+      let vCol = [];
+      for(let yy=0; yy<9; yy++) {
+        let val = this.sud[xx][yy];
+        if(vCol.includes(val)) {
+          console.log("Col (" + val + "): [x: " + xx + " y: " + yy + "]");
+        }
+        if(vRow[xx].includes(val)) {
+          console.log("Col (" + val + "): [x: " + xx + " y: " + yy + "]");
+        }
+        let sqrId = (floor(yy/3) * 3) + floor(xx/3);
+        if(vSqr[sqrId].includes(val)) {
+          console.log("Col (" + val + "): [x: " + xx + " y: " + yy + "]");
+        }
+        vCol.push(val);
+        vRow[xx].push(val);
+        vSqr[sqrId].push(val);
+      }
+    }
+    return true;
   }
 
 	// That one prints the sudoku table on the screen
@@ -124,6 +178,7 @@ function Sudoku() {
 	// Generate the sudoku
 	this.generateSudoku = () => {
     let generator = new SudokuGenerator();
-    generator.generateSudoku(this.sud);
+    while(!generator.generateSudoku(this.sud)) ;
+    console.log("Is sudoku correct: " + this.isCorrect());
   }
 }
