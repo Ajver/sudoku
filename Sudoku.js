@@ -23,29 +23,50 @@ function SudokuGenerator() {
   }
 
 	// Remove field in specific position
-	this.removeField = () => {
-  
+	this.removeField = (v, x, y) => {
+    for(let i=v.length-1; i>=0; i--) {
+      if(v[i].x == x) {
+        if(v[i].y == y) {
+          v.splice(i, 1);
+          return;
+        }
+      }
+    }
   }
 
 	// x, y are position of field (not square), that is in square for remove
-	this.removeSquare = () => {
-
+	this.removeSquare = (v, x, y) => {
+    let startX = floor(x/3) * 3;
+    let startY = floor(y/3) * 3;
+    let toX = startX+3;
+    let toY = startY+3;
+    for(let xx=startX; xx<toX; xx++) {
+      for(let yy=startY; yy<toY; yy++) {
+        this.removeField(v, xx, yy);
+      }
+    }
   }
 
 	// Remove all fields with specific y
-	this.removeRow = () => {
-
+	this.removeRow = (v, y) => {
+    for(let i=v.length-1; i>=0; i--) {
+      if(v[i].y == y) {
+        v.splice(i, 1);
+      }
+    }
   }
 
 	// Remove all fields with specific x
-	this.removeColumn = () => {
-
+	this.removeColumn = (v, x) => {
+    for(let i=v.length-1; i>=0; i--) {
+      if(v[i].x == x) {
+        v.splice(i, 1);
+      }
+    }
   }
 
 	// Returns random point from vector and NOT removing that!
-	this.getRandomPoint = () => {
-
-  }
+	this.getRandomPoint = v => v[random(v.length)];
 }
 
 
@@ -86,7 +107,10 @@ function Sudoku() {
 
             fill(140, 100, 190);
             noStroke();
-            text(this.sud[j*3 + b][i*3 + a], offX + b*cellSize + cellSize*0.33, offY + a*cellSize + cellSize*0.75);
+            let val = this.sud[j*3 + b][i*3 + a]
+            if(val != 0) {
+              text(val, offX + b*cellSize + cellSize*0.33, offY + a*cellSize + cellSize*0.75);
+            }
           }
         }
         noFill();
@@ -100,6 +124,6 @@ function Sudoku() {
 	// Generate the sudoku
 	this.generateSudoku = () => {
     let generator = new SudokuGenerator();
-    generator.generateSudoku();
+    generator.generateSudoku(this.sud);
   }
 }
