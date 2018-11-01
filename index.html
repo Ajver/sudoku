@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Sudoku</title>
   <style>
     body {
+      margin: 7px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,9 +16,35 @@
       font-family: Arial, Helvetica, sans-serif;
     }
     h1 {
-      color: #ebed7d;
+      color: #f2d35c;
       font-size: 50px;
       letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .btn-container {
+      width: 600px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-direction: row;
+      padding: 30px 0;
+      background-color: #555555;
+      border: 1px solid #aaaaaa;
+    }
+    .btn-container .btn {
+      padding: 8px 20px;
+      font-size: 20px;
+      color: #323232;
+      background-color: #f2d35c;
+      border: 1px solid #323232;
+    }
+    .p5Canvas {
+      border: 1px solid #aaaaaa;
+    }
+    .wrap {
+      display: flex;
+      flex-direction: column;
+      transition: .5s;
     }
   </style>
 </head>

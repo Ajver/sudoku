@@ -103,14 +103,26 @@ function Sudoku() {
 
   // A sudoku table
   this.sud = [];
-  
-  for(let i=0; i<9; i++) {
-    let row = [];
-    for(let j=0; j<9; j++) {
-      row.push(0);
+
+  // Selected field position
+  this.selX = -1;
+  this.selY = -1;
+
+  this.clearSudoku = () => {
+    this.selX = -1;
+    this.selY = -1;
+    this.sud = [];
+    for(let i=0; i<9; i++) {
+      let row = [];
+      for(let j=0; j<9; j++) {
+        row.push(0);
+      }
+      this.sud.push(row);    
     }
-    this.sud.push(row);    
   }
+
+  // Do this automaticly while creating new Sudoku object
+  this.clearSudoku();
 
 	// Function that tests sudoku and returns if is it correct
 	this.isCorrect = () => {
@@ -158,10 +170,11 @@ function Sudoku() {
             noFill();
             stroke(100);
             rect(offX + b*cellSize, offY + a*cellSize, cellSize, cellSize);
-
-            fill(140, 100, 190);
+            fill(26, 115, 221);
             noStroke();
-            let val = this.sud[j*3 + b][i*3 + a]
+            let fx = j*3 + b;
+            let fy = i*3 + a;
+            let val = this.sud[fx][fy];
             if(val != 0) {
               text(val, offX + b*cellSize + cellSize*0.33, offY + a*cellSize + cellSize*0.75);
             }
@@ -178,7 +191,29 @@ function Sudoku() {
 	// Generate the sudoku
 	this.generateSudoku = () => {
     let generator = new SudokuGenerator();
-    while(!generator.generateSudoku(this.sud)) ;
+    let count = 0;
+    while(!generator.generateSudoku(this.sud)) {
+      count++;
+    }
+    console.log("After " + count + " times");
     console.log("Is sudoku correct: " + this.isCorrect());
+  }
+
+  this.select = () => {
+    let cellSize = width/9;
+    let x = floor(mouseX / cellSize);
+    let y = floor(mouseY / cellSize);
+    if(x >= 0) {
+      if(x < 9) {
+        if(y >= 0) {
+          if(y < 9) {
+            // For debugging
+            // console.log('selected: [x: ' + x + ' y: ' + y + ']');
+            this.selX = x;
+            this.selY = y;
+          }
+        }
+      }
+    }
   }
 }
