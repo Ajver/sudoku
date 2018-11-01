@@ -69,7 +69,32 @@ function Sudoku() {
 
 	// That one prints the sudoku table on the screen
   this.draw = () => {
+    let cellSize = width/9;
+    let sqrSize = width/3; 
+    textSize(cellSize*0.7);
+    for(let i=0; i<3; i++) {
+      for(let j=0; j<3; j++) {
+        let offX = j*sqrSize;
+        let offY = i*sqrSize;
+        strokeWeight(2);
+        stroke(100);
+        for(let a=0; a<3; a++) {
+          for(let b=0; b<3; b++) {
+            noFill();
+            stroke(100);
+            rect(offX + b*cellSize, offY + a*cellSize, cellSize, cellSize);
 
+            fill(140, 100, 190);
+            noStroke();
+            text(this.sud[j*3 + b][i*3 + a], offX + b*cellSize + cellSize*0.33, offY + a*cellSize + cellSize*0.75);
+          }
+        }
+        noFill();
+        strokeWeight(4);
+        stroke(170);
+        rect(offX, offY, sqrSize, sqrSize);
+      }
+    }
   } 
 
 	// Generate the sudoku
