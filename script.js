@@ -15,6 +15,22 @@ function draw() {
   sudoku.draw();
 }
 
+function mousePressed() {
+  mouseX = floor(mouseX / scale);
+  mouseY = floor(mouseY / scale);
+  sudoku.select();
+  // console.log("mouseX: " + mouseX + " mouseY: " + mouseY);
+}
+
+function keyPressed() {
+  let val = keyCode - 48;
+  if(val > 0) {
+    if(val <= 9) {
+      sudoku.override(val);
+    }
+  }
+}
+
 const newButton = (title, ev) => {
   let btn = document.createElement('button');
   btn.classList.add('btn');
@@ -38,25 +54,15 @@ const setHTML = () => {
   wrap.appendChild(canv);
   wrap.appendChild(box);
   body.appendChild(wrap);
+  let footer = document.createElement('footer');
+  let footCont = document.createElement('p');
+  footCont.innerHTML = 'Made by Dominik Zawlocki ';
+  footCont.innerHTML += '<a href="https://github.com/Ajver/sudoku" target="_blank" title="Look at my other projects">My Github</a>';
+  footer.appendChild(footCont);
+  body.appendChild(footer);
 
   if(wrap.offsetWidth > window.innerWidth || wrap.offsetHeight > window.innerHeight) {
     toogleFullScreen();
-  }
-}
-
-function mousePressed() {
-  mouseX = floor(mouseX / scale);
-  mouseY = floor(mouseY / scale);
-  sudoku.select();
-  // console.log("mouseX: " + mouseX + " mouseY: " + mouseY);
-}
-
-function keyPressed() {
-  let val = keyCode - 48;
-  if(val > 0) {
-    if(val <= 9) {
-      sudoku.override(val);
-    }
   }
 }
 
