@@ -64,9 +64,9 @@ const fitToWindow = () => {
   let wrap = document.querySelector('.wrap');
   let scrProp = window.innerWidth / window.innerHeight;
   let wrpProp = wrap.offsetWidth / wrap.offsetHeight;
-  if(wrpProp < scrProp) { // To height
+  if(wrpProp < scrProp) { // Fit to height
     scale = (window.innerHeight) / wrap.offsetHeight;
-  }else { // To width
+  }else { // Fit to width
     scale = window.innerWidth / wrap.offsetWidth;
   }
   wrap.style.transform = 'scale(' + scale + ')';
