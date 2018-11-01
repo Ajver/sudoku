@@ -167,13 +167,18 @@ function Sudoku() {
         stroke(100);
         for(let a=0; a<3; a++) {
           for(let b=0; b<3; b++) {
+            let fx = j*3 + b;
+            let fy = i*3 + a;
             noFill();
+            if(this.selX === fx) {
+              if(this.selY === fy) {
+                fill(242, 211, 92);
+              }
+            }
             stroke(100);
             rect(offX + b*cellSize, offY + a*cellSize, cellSize, cellSize);
             fill(26, 115, 221);
             noStroke();
-            let fx = j*3 + b;
-            let fy = i*3 + a;
             let val = this.sud[fx][fy];
             if(val != 0) {
               text(val, offX + b*cellSize + cellSize*0.33, offY + a*cellSize + cellSize*0.75);
@@ -211,6 +216,18 @@ function Sudoku() {
             // console.log('selected: [x: ' + x + ' y: ' + y + ']');
             this.selX = x;
             this.selY = y;
+          }
+        }
+      }
+    }
+  }
+
+  this.override = val => {
+    if(this.selX >= 0) {
+      if(this.selX < 9) {
+        if(this.selY >= 0) {
+          if(this.selY < 9) {
+            this.sud[this.selX][this.selY] = val;
           }
         }
       }

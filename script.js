@@ -51,6 +51,15 @@ function mousePressed() {
   // console.log("mouseX: " + mouseX + " mouseY: " + mouseY);
 }
 
+function keyPressed() {
+  let val = keyCode - 48;
+  if(val > 0) {
+    if(val <= 9) {
+      sudoku.override(val);
+    }
+  }
+}
+
 const fitToWindow = () => {
   let wrap = document.querySelector('.wrap');
   let scrProp = window.innerWidth / window.innerHeight;
