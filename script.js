@@ -5,7 +5,7 @@ function setup() {
   createCanvas(600, 600);
 
   sudoku = new Sudoku();
-  sudoku.draw();
+  sudoku.generateSudoku();
 }
 
 function draw() {

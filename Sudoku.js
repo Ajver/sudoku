@@ -1,18 +1,25 @@
-function Point() {
-	this.x = 0;
-	this.y = 0;
+function Point(x, y) {
+	this.x = x;
+	this.y = y;
 }
 
 function SudokuGenerator() {
-	
+
 	// That method is genereting sudoku in the sud array
 	this.generateSudoku = sud => {
-
+    
   }
 
 	// That function returns us vector with all Points from sudoku Table
 	this.createHugeVector = () => {
-    
+    let v = [];
+    for(let xx=0; xx<9; xx++) {
+      for(let yy=0; yy<9; yy++) {
+        let p = new Point(xx, yy);
+        v.push(p);
+      }
+    }
+    return v;
   }
 
 	// Remove field in specific position
@@ -62,11 +69,12 @@ function Sudoku() {
 
 	// That one prints the sudoku table on the screen
   this.draw = () => {
-    
+
   } 
 
 	// Generate the sudoku
 	this.generateSudoku = () => {
-
+    let generator = new SudokuGenerator();
+    generator.generateSudoku();
   }
 }
