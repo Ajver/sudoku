@@ -70,29 +70,25 @@
   <?php
     require_once 'sudgen.php';
     
-    $grid = [1, 2, 3, 4, 5, 6, 7, 8];
-  
-    array_splice($grid, 5, 1);
+    $gen = new SudokuGenerator();
+
+    $sud = $gen->generateSudoku();
     
-    print_r($grid);
-  
+    echo '<script>';
+    echo 'const sud = [ ';
+    for($yy=0; $yy<9; $yy++) {
+      echo '[';
+      for($xx=0; $xx<9; $xx++) {
+        echo $sud[$xx][$yy] . ', ';
+      }
+      echo ']' . ($yy < 8 ? ',' : ' ');
+    }
+    echo '];';
+    echo '</script>';  
   ?>
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-<!--
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
   <script src="play.js"></script>
-  <script src="Sudoku.js"></script>
--->
+
 </body>
 </html>

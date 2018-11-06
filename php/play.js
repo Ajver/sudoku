@@ -5,7 +5,8 @@ let sudoku = {};
 
 function setup() {
   createCanvas(600, 600);
-  sudoku = new Sudoku();
+  sudoku = new Sudoku(sud);
+  console.log("Is sudoku correct: " + sudoku.isCorrect());
 
   setHTML();
 }
@@ -22,30 +23,14 @@ function Point(x, y) {
 	this.y = y;
 }
 
-function Sudoku() {
+function Sudoku(sud) {
 
   // A sudoku table
-  this.sud = [];
+  this.sud = sud;
 
   // Selected field position
   this.selX = -1;
   this.selY = -1;
-
-  this.clearSudoku = () => {
-    this.selX = -1;
-    this.selY = -1;
-    this.sud = [];
-    for(let i=0; i<9; i++) {
-      let row = [];
-      for(let j=0; j<9; j++) {
-        row.push(0);
-      }
-      this.sud.push(row);    
-    }
-  }
-
-  // Do this automaticly while creating new Sudoku object
-  this.clearSudoku();
 
   // Function that tests sudoku and returns if is it correct
   this.isCorrect = () => {
