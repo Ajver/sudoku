@@ -168,8 +168,8 @@ const setHTML = () => {
   let box = document.createElement('div');
   box.classList.add('btn-container');
   //box.appendChild(newButton('Generate new sudoku', () => { sudoku.generateSudoku(); }));
-  box.appendChild(newButton('Clear sudoku', () => { sudoku.clearSudoku(); }));
-  box.appendChild(newButton('Fullscreen', () => { toogleFullScreen() }));
+  box.appendChild(newButton('New sudoku', () => { location.reload(); }));
+  box.appendChild(newButton('Fullscreen', () => { toogleFullScreen(); }));
   let canv = document.querySelector('.p5Canvas');
   wrap.appendChild(canv);
   wrap.appendChild(box);
