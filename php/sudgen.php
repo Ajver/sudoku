@@ -14,6 +14,32 @@ class Point {
 
 class SudokuGenerator {
 
+  private $frames = [];
+
+  function nextPoint(& $frame, $x, $y) {
+    static $index = 0;
+
+    $p = new Point();
+    $p->create($y, $x);
+    $frame[$index] = $p;
+
+    $index++;
+  }
+
+  function setup() {
+    $frame = [];   
+
+    $this->nextPoint($frame, 0, 0);
+    $this->nextPoint($frame, 2, 0);
+    $this->nextPoint($frame, 1, 4);
+    $this->nextPoint($frame, 5, 5);
+    $this->nextPoint($frame, 2, 6);
+    $this->nextPoint($frame, 6, 7);
+    $this->nextPoint($frame, 8, 8);
+
+    $this->frames[0] = $frame;
+  }
+
   function blankSudoku() {
     // Create the sudoku array
     $sud = [9];
@@ -33,7 +59,7 @@ class SudokuGenerator {
       $sud = $this->_generateSudoku();
 
       if(is_array($sud)) {
-        return $sud;
+        return $this->makeHoles($sud);
       }
     }
   }
@@ -80,6 +106,17 @@ class SudokuGenerator {
     }
 
     // If sudoku has been generated successfully
+    return $sud;
+  }
+
+  function makeHoles($sud) {
+    $frame = $this->frames[0];
+
+    for($i=0; $i<count($frame); $i++) {
+      $p = $frame[$i];
+      $sud[$p->x][$p->y] = 0;
+    }
+
     return $sud;
   }
 

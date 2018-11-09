@@ -80,9 +80,10 @@
     require_once 'sudgen.php';
     
     $gen = new SudokuGenerator();
+    $gen->setup();
 
-    //$sud = $gen->generateSudoku();
-    $sud = $gen->blankSudoku();
+    $sud = $gen->generateSudoku();
+    //$sud = $gen->blankSudoku();
 
     echo '<script>';
     echo 'const sud = [ ';
