@@ -51,22 +51,31 @@
     .p5Canvas {
       border: 1px solid #aaaaaa;
     }
-    .wrap {
+    #wrap {
       display: flex;
       flex-direction: column;
       transition: .5s;
+      width: 600px;
+      height: 662px;
     }
+    #wrap.fitted {
+      position: fixed;
+      top: calc(50vh - 331px);
+      left: calc(50vw - 300px);
+    } 
     footer a {
       color: #043775;
       text-decoration: none;
       letter-spacing: 1px;
     }
+    
   </style>
 </head>
 <body>
   <h1>Sudoku</h1>
   
-  
+  <div id='wrap'></div>
+
   <?php
     require_once 'sudgen.php';
     

@@ -167,8 +167,7 @@ const setHTML = () => {
   let body = document.querySelector('body');
 
   // Container for p5Canvas and btn-container
-  let wrap = document.createElement('div');
-  wrap.classList.add('wrap');
+  let wrap = document.querySelector('#wrap');
   let box = document.createElement('div');
   box.classList.add('btn-container');
   //box.appendChild(newButton('Generate new sudoku', () => { sudoku.generateSudoku(); }));
@@ -191,7 +190,7 @@ const setHTML = () => {
 }
 
 const fitToWindow = () => {
-  let wrap = document.querySelector('.wrap');
+  let wrap = document.querySelector('#wrap');
   let scrProp = window.innerWidth / window.innerHeight;
   let wrpProp = wrap.offsetWidth / wrap.offsetHeight;
   if(wrpProp < scrProp) { // Fit to height
@@ -200,13 +199,26 @@ const fitToWindow = () => {
     scale = window.innerWidth / wrap.offsetWidth;
   }
   wrap.style.transform = 'scale(' + scale + ')';
+  addClassToWrap();
+} 
+
+const addClassToWrap = () => {
+  window.setTimeout(() => {
+    let wrap = document.querySelector('#wrap');
+    wrap.classList.add('fitted');
+  }, 500);
+}
+
+const remvoeClassFromWrap = () => {
+  wrap.classList.remove('fitted');
 }
 
 const toogleFullScreen = () => {
+  let wrap = document.querySelector('#wrap');
   if(isFullscreen) {
-    let wrap = document.querySelector('.wrap');
     wrap.style.transform = 'scale(1.0)';
     scale = 1.0;
+    remvoeClassFromWrap();
   }else {
     fitToWindow();
   }
