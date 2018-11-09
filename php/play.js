@@ -173,7 +173,7 @@ const setHTML = () => {
   box.classList.add('btn-container');
   //box.appendChild(newButton('Generate new sudoku', () => { sudoku.generateSudoku(); }));
   box.appendChild(newButton('New sudoku', () => { location.reload(); }));
-  box.appendChild(newButton('Fullscreen', () => { toogleFullScreen(); }));
+  box.appendChild(newButton('Fit to window', () => { toogleFullScreen() }));
   let canv = document.querySelector('.p5Canvas');
   wrap.appendChild(canv);
   wrap.appendChild(box);
