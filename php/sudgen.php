@@ -14,6 +14,20 @@ class Point {
 
 class SudokuGenerator {
 
+  function blankSudoku() {
+    // Create the sudoku array
+    $sud = [9];
+
+    for($i=0; $i<9; $i++) {
+      $sud[$i] = [];
+      for($j=0; $j<9; $j++) {
+        $sud[$i][$j] = rand(1, 9);
+      }
+    }
+
+    return $sud;
+  }
+
   function generateSudoku() {
     while(true) {
       $sud = $this->_generateSudoku();
