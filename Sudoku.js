@@ -126,6 +126,7 @@ function Sudoku() {
 
 	// Function that tests sudoku and returns if is it correct
 	this.isCorrect = () => {
+    let good = true;
     let vRow = [];
     let vSqr = [];
     for(let i=0; i<9; i++) {
@@ -138,20 +139,23 @@ function Sudoku() {
         let val = this.sud[xx][yy];
         if(vCol.includes(val)) {
           console.log("Col (" + val + "): [x: " + xx + " y: " + yy + "]");
+          good = false;
         }
         if(vRow[xx].includes(val)) {
-          console.log("Col (" + val + "): [x: " + xx + " y: " + yy + "]");
+          console.log("Row (" + val + "): [x: " + xx + " y: " + yy + "]");
+          good = false;
         }
         let sqrId = (floor(yy/3) * 3) + floor(xx/3);
         if(vSqr[sqrId].includes(val)) {
-          console.log("Col (" + val + "): [x: " + xx + " y: " + yy + "]");
+          console.log("Sqr (" + val + "): [x: " + xx + " y: " + yy + "]");
+          good = false;
         }
         vCol.push(val);
         vRow[xx].push(val);
         vSqr[sqrId].push(val);
       }
     }
-    return true;
+    return good;
   }
 
 	// That one prints the sudoku table on the screen
