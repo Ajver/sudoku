@@ -72,8 +72,9 @@
     
     $gen = new SudokuGenerator();
 
-    $sud = $gen->generateSudoku();
-    
+    //$sud = $gen->generateSudoku();
+    $sud = $gen->blankSudoku();
+
     echo '<script>';
     echo 'const sud = [ ';
     for($yy=0; $yy<9; $yy++) {
